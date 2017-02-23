@@ -22,3 +22,25 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.controller('BowlingController', function($scope, $http) {
+  $scope.tests = [
+        { points:'0', token:'Liza'},
+        ];
+ 
+    $scope.getData = function() {
+        $http.get("http://95.85.62.55/api/points", { params: { "key1": "value1", "key2": "value2" } })
+            .success(function(data) {
+                $scope.points = data.points;
+                $scope.token = data.token;
+                $scope.score = "læg alle points sammen selv din dovne hund :P"; //fortsæt her
+            })
+            .error(function(data) {
+                alert("ERROR");
+            });
+    }
+
+
+ 
+});
+
