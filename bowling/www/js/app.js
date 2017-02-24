@@ -46,8 +46,7 @@ angular.module('starter', ['ionic'])
 
        //recognize strike
       rundeSomSkalTestes = framePoints[key]
-      sidsteRunde = framePoints[key-1] //spare lægger bonus af det næste skud, oven i. strike lægger næste 2 skud oven i scoren
-      næsteRunde = framePoints[key+1] 
+      næsteRunde = framePoints[key+1] //spare lægger bonus af det næste skud, oven i. strike lægger næste 2 skud oven i scoren
 
       console.log("runde",key+1,": ", rundeSomSkalTestes[0],",",rundeSomSkalTestes[1])
         //hvis det er en strike
