@@ -42,19 +42,19 @@
 
     <ion-content>
               <p>dummy data (look in console after button press (f12 in chrome))</p>
-              <button class="button" ng-click="test()">Offline static test</button>
+              <button class="button" ng-click="test()">Offline Array test</button>
               <ion-list>
                   <ion-item ng-repeat="dummydata in dummydatas">
 
                           <h1>Points scored: {{dummydata.points}}</h1>
                           <h3>token: {{dummydata.token}}</h3>
-                          <h3>resultat: {{dummydata.totalpoints}}</h3>
-                          
+                          <h3>Dummy resultat: {{dummydata.totalpoints}}</h3>
+                          <h3>Rigtige resultat: {{newscore}}</h3>
                   </ion-item>
               </ion-list>
 
         <p>hent score fra http://95.85.62.55/api/points</p>
-        <button class="button" ng-click="getData()">get</button>
+        <button class="button" ng-click="getData()">Get Scoreboard from api</button>
         <h1>points:</h1>
         <p>{{points}}</p>
         <h3>token:</h3>

@@ -24,47 +24,20 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('BowlingController', function($scope, $http) {
+  //Jeg starter med at lave programmet online med statisk data fra arrayet neden under, for at teste inden jeg laver get request.
+  //API get og post requests kommer først i bunden af app.js
   $scope.dummydatas = [
         {
-        "points":[[5,4],[10,0],[8,0],[5,5],[2,7],[10,0],[5,2],[10,0],[1,6]],
+        "points":[[3,7],[10,0],[8,2],[8,1],[10,0],[3,4],[7,0],[5,5],[3,2],[2,5]],
         "token":"9ndP4Vkv5U91INRNNcA4VJrbLpowC4vh",
-        "totalpoints":"placeholder score",
-        },];
-
+        "totalpoints":"123 placeholder", // "points":[[5,4],[10,0],[8,0],[5,5],[2,7],[10,0],[5,2],[10,0],[1,6]],
+        },];//
+  
   $scope.test = function() {
+    $scope.newscore = 0
     //this is the entire points array in the dummydatas array, seen above
       framePoints = $scope.dummydatas[0].points //scope.
-/*
-    //logs round one scores in array form
-        console.log(framePoints[0]);
-        console.log("Round 1 shot 1: ",framePoints[0][0],"pins down. Round 1 shot 2: ",framePoints[0][1]," pins down");
-    //score is calculated
-      roundOne = framePoints[0][0] + framePoints[0][1]
-        console.log("points: ", roundOne)
 
-    //recognize strike
-    console.log("write out specific round and determine if it is a strike or spare")
-    rundSomSkalTestes = framePoints[0] //3 = spare, 1 = strike, 0 = miss
-    console.log("test runden", rundSomSkalTestes, "om det er en strike eller spare")
-      if(rundSomSkalTestes[0] == 10)
-      {
-        console.log("Det er en Strike! :D")
-      }
-      else
-      {
-        if(rundSomSkalTestes[0] + rundSomSkalTestes[1] == 10)
-        {
-          console.log("Det er en Spare! :)")
-        }
-        else
-        {
-        console.log("hverken en strike eller en spare :(",
-        rundSomSkalTestes[0] + rundSomSkalTestes[1] ,
-        "point scoret")
-
-        }
-      }
-*/
     //print alle runder ud
     points = $scope.dummydatas[0].points
     angular.forEach(points, function(points, key)
@@ -72,35 +45,48 @@ angular.module('starter', ['ionic'])
      console.log(key + ': ' + points);
 
        //recognize strike
-      rundSomSkalTestes = framePoints[key] //3 = spare, 1 = strike, 0 = miss
-      console.log("finder ud af om runde",key, rundSomSkalTestes, "er en strike eller spare")
-        if(rundSomSkalTestes[0] == 10)
+      rundeSomSkalTestes = framePoints[key]
+      sidsteRunde = framePoints[key-1] //spare lægger bonus af det næste skud, oven i. strike lægger næste 2 skud oven i scoren
+      næsteRunde = framePoints[key+1] 
+
+      console.log("runde",key+1,": ", rundeSomSkalTestes[0],",",rundeSomSkalTestes[1])
+        //hvis det er en strike
+        if(rundeSomSkalTestes[0] == 10)
         {
-          console.log("Resultatet for runden ",key," er en Strike! :D")
+          console.log("Resultatet for runden ","er en Strike! :D")
+          $scope.newscore = $scope.newscore + 10 + framePoints[key+1][0]+framePoints[key+1][1];
+          console.log("total score er:",$scope.newscore)
         }
         else
         {
-          if(rundSomSkalTestes[0] + rundSomSkalTestes[1] == 10)
+          //hvis det er en spare
+          if(rundeSomSkalTestes[0] + rundeSomSkalTestes[1] == 10)
           {
-            console.log("Resultatet for runden ",key," er en Spare! :)")
+            console.log("Resultatet for runden ","er en Spare! :)")
+            $scope.newscore = $scope.newscore + 10 + framePoints[key+1][0];
+            console.log("total score er:",$scope.newscore)
           }
-          else
+          else // hvis det er et miss e.g hverken en strike eller en spare
           {
-          console.log("Resultatet for runden ",key," er et miss :(",
-          rundSomSkalTestes[0] + rundSomSkalTestes[1] ,
-          " points scoret")
+            missPointCalculate = rundeSomSkalTestes[0] + rundeSomSkalTestes[1]
+            console.log("Resultatet for runden ","er et miss :(", missPointCalculate,
+            " points scoret")
+            $scope.newscore = $scope.newscore + missPointCalculate;
+            console.log("total score er:",$scope.newscore)
 
           }
         }
 
     });
+    
+
 
 
 }
 
- //get request
+ //get request begynder her
  //https://www.thepolyglotdeveloper.com/2014/08/make-http-requests-android-ios-ionicframework/
-/*
+
     $scope.getData = function() {
         $http.get("http://95.85.62.55/api/points", { params: { "key1": "value1", "key2": "value2" } })
             .success(function(data) {
@@ -113,7 +99,7 @@ angular.module('starter', ['ionic'])
                 alert("ERROR");
             });
     }
-*/
+
  
 });
 
