@@ -41,12 +41,14 @@
 
 
     <ion-content>
-              <p>dummy data</p>
+              <p>dummy data (look in console after button press (f12 in chrome))</p>
+              <button class="button" ng-click="test()">Offline static test</button>
               <ion-list>
-                  <ion-item ng-repeat="test in tests">
+                  <ion-item ng-repeat="dummydata in dummydatas">
 
-                          <h1>Points scored: {{test.points}}</h1>
-                          <h3>token: {{test.token}}</h3>
+                          <h1>Points scored: {{dummydata.points}}</h1>
+                          <h3>token: {{dummydata.token}}</h3>
+                          <!-- <h3>ressultat: {{dummydata.ressult}}</h3> -->
                           
                   </ion-item>
               </ion-list>
