@@ -28,39 +28,72 @@ angular.module('starter', ['ionic'])
         {
         "points":[[5,4],[10,0],[8,0],[5,5],[2,7],[10,0],[5,2],[10,0],[1,6]],
         "token":"9ndP4Vkv5U91INRNNcA4VJrbLpowC4vh",
+        "totalpoints":"placeholder score",
         },];
 
   $scope.test = function() {
-//this is the entire points array in the dummydatas array, seen above
-  framePoints = $scope.dummydatas[0].points //scope.
-//logs round one scores in array form
-    console.log(framePoints[0]);
-    console.log("Round 1 shot 1: ",framePoints[0][0],"pins down. Round 1 shot 2: ",framePoints[0][1]," pins down");
-//score is calculated
-  roundOne = framePoints[0][0] + framePoints[0][1]
-    console.log("points: ", roundOne)
+    //this is the entire points array in the dummydatas array, seen above
+      framePoints = $scope.dummydatas[0].points //scope.
+/*
+    //logs round one scores in array form
+        console.log(framePoints[0]);
+        console.log("Round 1 shot 1: ",framePoints[0][0],"pins down. Round 1 shot 2: ",framePoints[0][1]," pins down");
+    //score is calculated
+      roundOne = framePoints[0][0] + framePoints[0][1]
+        console.log("points: ", roundOne)
 
-//recognize strike
-console.log("write out specific round and determine if it is a strike or spare")
-rundSomSkalTestes = framePoints[0] //3 = spare, 1 = strike, 0 = miss
-console.log("test runden", rundSomSkalTestes, "om det er en strike eller spare")
-  if(rundSomSkalTestes[0] == 10)
-  {
-    console.log("Det er en Strike! :D")
-  }
-  else
-  {
-    if(rundSomSkalTestes[0] + rundSomSkalTestes[1] == 10)
+    //recognize strike
+    console.log("write out specific round and determine if it is a strike or spare")
+    rundSomSkalTestes = framePoints[0] //3 = spare, 1 = strike, 0 = miss
+    console.log("test runden", rundSomSkalTestes, "om det er en strike eller spare")
+      if(rundSomSkalTestes[0] == 10)
+      {
+        console.log("Det er en Strike! :D")
+      }
+      else
+      {
+        if(rundSomSkalTestes[0] + rundSomSkalTestes[1] == 10)
+        {
+          console.log("Det er en Spare! :)")
+        }
+        else
+        {
+        console.log("hverken en strike eller en spare :(",
+        rundSomSkalTestes[0] + rundSomSkalTestes[1] ,
+        "point scoret")
+
+        }
+      }
+*/
+    //print alle runder ud
+    points = $scope.dummydatas[0].points
+    angular.forEach(points, function(points, key)
     {
-      console.log("Det er en Spare! :)")
-    }
-    else
-    {
-    console.log("hverken en strike eller en spare :(",
-    rundSomSkalTestes[0] + rundSomSkalTestes[1] ,
-    "point scoret")
-    }
-  }
+     console.log(key + ': ' + points);
+
+       //recognize strike
+      rundSomSkalTestes = framePoints[key] //3 = spare, 1 = strike, 0 = miss
+      console.log("finder ud af om runde",key, rundSomSkalTestes, "er en strike eller spare")
+        if(rundSomSkalTestes[0] == 10)
+        {
+          console.log("Resultatet for runden ",key," er en Strike! :D")
+        }
+        else
+        {
+          if(rundSomSkalTestes[0] + rundSomSkalTestes[1] == 10)
+          {
+            console.log("Resultatet for runden ",key," er en Spare! :)")
+          }
+          else
+          {
+          console.log("Resultatet for runden ",key," er et miss :(",
+          rundSomSkalTestes[0] + rundSomSkalTestes[1] ,
+          " points scoret")
+
+          }
+        }
+
+    });
 
 
 }
