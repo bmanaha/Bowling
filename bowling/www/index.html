@@ -36,7 +36,7 @@
 
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+        <h1 class="title">Ionic Bowling app</h1>
       </ion-header-bar>
 
 
@@ -46,7 +46,7 @@
               <ion-list>
                   <ion-item ng-repeat="dummydata in dummydatas">
 
-                          <h1>Points scored: {{dummydata.points}}</h1>
+                          <h2>Points scored: {{dummydata.points}}</h2>
                           <h3>token: {{dummydata.token}}</h3>
                           <h3>Dummy resultat: {{dummydata.totalpoints}}</h3>
                           <h3>Rigtige resultat: {{newscore}}</h3>
@@ -61,9 +61,13 @@
                     <p>{{points}}</p>
                     <h3>token:</h3>
                     <p>{{token}}</p>
-                    <h1>score:</h1>
+                    <h1>Spil Serie:</h1>
                     <p>{{beregnScore}}</p>
-                    <p>Her er den totale score:{{newScore}}</p>
+                    <h2>Her er den totale score: {{newScore}}</h2>
+                    <h2>score: </h2>
+                    <p>{{sumPoints}}</p>
+                    <h3>{{successQuestion}}</h3>
+
                 </ion-item>
             </ion-list>
 

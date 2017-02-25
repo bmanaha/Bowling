@@ -186,25 +186,26 @@ angular.forEach(framePoints, function(framePoints, key)
         console.log("Total score er nu: ",$scope.sumPoints[key])
         
      });//for each løkke slut
-console.log($scope.sumPoints);
+console.log($scope.sumPoints);//skal gøre noget ved sidste rude i tilfælde af 3 strikes eller en strike og en spare
 
-//Post request her:
-//http://stackoverflow.com/questions/19254029/angularjs-http-post-does-not-send-data
-/*
-$http({
-        url: 'request-url',
-        method: "POST",
-        data: { 'message' : message }
-    })
-    .then(function(response) {
-            // success
-    }, 
-    function(response) { // optional
-            // failed
-    });
-}
-*/
-//Post request end
+          //Post request her:
+          //http://stackoverflow.com/questions/19254029/angularjs-http-post-does-not-send-data
+
+          $http({
+                  url: 'http://95.85.62.55/api/points',
+                  method: "POST",
+                  data: { 'token' : $scope.token,'points' : $scope.sumPoints }
+                })
+                .success(function(data, status, headers, config)
+                {
+                  $scope.successQuestion = data.success
+                  console.log("Rigtigt resultat: ",$scope.successQuestion)
+                })
+                .error(function(data, status, headers, config)
+                {
+                alert.log("error")
+                });
+
             })// hvis get requestet ikke ender godt
             .error(function(data) {
                 alert("ERROR");
