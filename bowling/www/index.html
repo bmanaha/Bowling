@@ -41,8 +41,8 @@
 
 
     <ion-content>
-              <p>dummy data (look in console after button press (f12 in chrome))</p>
-              <button class="button" ng-click="test()">Offline Array test</button>
+              <p>dummy data (se i konsollen efter du har trykket på knappen (f12 for at åbne konsollen i chrome)</p>
+              <button class="button" ng-click="test()">Beregn resultatet af 'Offline' Arrayet points</button>
               <ion-list>
                   <ion-item ng-repeat="dummydata in dummydatas">
 
@@ -54,13 +54,20 @@
               </ion-list>
 
         <p>hent score fra http://95.85.62.55/api/points</p>
-        <button class="button" ng-click="getData()">Get Scoreboard from api</button>
-        <h1>points:</h1>
-        <p>{{points}}</p>
-        <h3>token:</h3>
-        <p>{{token}}</p>
-        <h1>score:</h1>
-        <p>{{score}}</p>
+            <ion-list>
+                <ion-item>
+                    <button class="button" ng-click="getData()">Get Scoreboard from api</button>
+                    <h1>points:</h1>
+                    <p>{{points}}</p>
+                    <h3>token:</h3>
+                    <p>{{token}}</p>
+                    <h1>score:</h1>
+                    <p>{{beregnScore}}</p>
+                    <p>Her er den totale score:{{newScore}}</p>
+                </ion-item>
+            </ion-list>
+
+
     </ion-content>
 
     </ion-pane>

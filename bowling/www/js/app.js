@@ -89,10 +89,104 @@ angular.module('starter', ['ionic'])
     $scope.getData = function() {
         $http.get("http://95.85.62.55/api/points", { params: { "key1": "value1", "key2": "value2" } })
             .success(function(data) {
-                $scope.points = data.points;
+                framePoints = $scope.points = data.points;
                 $scope.token = data.token;
-                $scope.score = "læg alle points sammen selv din dovne hund :P"; //fortsæt her
-                //console.log($scope.points)
+                $scope.beregnScore = "Læg alle points sammen selv din dovne hund! Det er gas, her er resultatet :P"; //fortsæt her
+                $scope.newScore = 0
+                console.log($scope.points)
+// Skriv alle runder ud og beregn alle points
+angular.forEach(framePoints, function(framePoints, key)
+    {
+     console.log(key + ': ' + framePoints);
+//start for each // key = scoren for et skud //index of framePoints, $scope.points.indexOf(framePoints)
+      //bliver brugt til at regne bonus points ud senere
+      
+      if(data.points[key] == null){
+        denneRunde = 0
+      }else{
+        denneRunde = data.points[key]
+      }
+      if(data.points[key+1] == null){
+        næsteRunde = 0
+      }
+      else{
+        næsteRunde = data.points[key+1]
+      }
+      if(data.points[key+2] == null){
+        næsteNæsteRunde = 0
+      }
+      else{
+        næsteNæsteRunde = data.points[key+2]
+      }
+      
+
+      console.log("runde",key+1,": ", denneRunde[0],",",denneRunde[1])
+        //hvis det er en strike
+        //strike lægger næste 2 skud oven i scoren
+        if(denneRunde[0] == 10)
+        {
+          console.log("Resultatet for runden ","er en Strike! :D")
+          //hvis det er sidste skud i serien eller de næste to skud ikke giver nogen points
+          if(data.points[key+1] == null || data.points[key+1][0] + data.points[key+1][1] == 0)
+          {
+            $scope.newScore = $scope.newScore + 10;
+          }
+          else
+          {
+            //lav et check om de næste to skud er strikes
+            console.log("strike på strike?")
+            if(næsteRunde[0] == 10)//data.points[key+1]//[0]
+            {
+              //tre strikes i træk/næste to er strikes
+              if(næsteNæsteRunde[0] == 10)//data.points[key+2]//[0]
+              {
+                $scope.newScore = $scope.newScore + 10 + næsteRunde[0] + næsteNæsteRunde[0];
+              }
+              //to strikes i træk
+              else
+              {
+                $scope.newScore = $scope.newScore + 10 + næsteRunde[0];
+              }
+            }
+            else
+            {
+              $scope.newScore = $scope.newScore + 10 + næsteRunde[0]+næsteRunde[1];
+            }
+          }
+          console.log("total score er:",$scope.newScore)
+        }
+        else
+        {
+          //hvis det er en spare
+          //spare lægger bonus af det næste skud, oven i. 
+          if(denneRunde[0] + denneRunde[1] == 10)
+          {
+            console.log("Resultatet for runden ","er en Spare! :)")
+            if(data.points[key+1] == null || data.points[key+1] == 0)
+            {
+              $scope.newScore = $scope.newScore + 10;
+            }
+            else
+            {
+              $scope.newScore = $scope.newScore + 10 + næsteRunde[0];
+            }
+            console.log("total score er:",$scope.newScore)
+          }
+          else // hvis det er et miss e.g hverken en strike eller en spare
+          {
+            missPointCalculate = denneRunde[0] + denneRunde[1]
+            console.log("Resultatet for runden ","er et miss :(", missPointCalculate,
+            " points scoret")
+            $scope.newScore = $scope.newScore + missPointCalculate;
+            console.log("total score er:",$scope.newScore)
+          }
+        }
+//for each løkke slut
+
+     });
+
+//
+
             })
             .error(function(data) {
                 alert("ERROR");
