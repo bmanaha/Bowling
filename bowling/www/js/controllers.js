@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 .controller('BowlingController', function($scope, $http) {
-  //Jeg starter med at lave programmet online med statisk data fra arrayet neden under, for at teste inden jeg laver get request.
-  //API get og post requests kommer først i bunden af app.js
+  //Jeg starter med at lave programmet offline med statisk data, se venligst $scope.getData scopet.
+  //API get og post requests kommer først i bunden af controller.js
   $scope.dummydatas = [
         {
         "points":[[3,7],[10,0],[8,2],[8,1],[10,0],[3,4],[7,0],[5,5],[3,2],[2,5]],
